@@ -1,1 +1,23 @@
-<p>catalogo works!</p>
+<div class="container py-4">
+  <h2 class="mb-4">Catálogo de productos</h2>
+
+  <div class="mb-4">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Buscar por nombre, marca o categoría"
+      [(ngModel)]="textoBusqueda"
+      (input)="filtrarProductos()"
+    >
+  </div>
+
+  <div *ngIf="productosFiltrados.length === 0" class="alert alert-warning">
+    No se encontraron productos.
+  </div>
+
+  <div class="row g-4" *ngIf="productosFiltrados.length > 0">
+    <div class="col-md-6 col-lg-4" *ngFor="let producto of productosFiltrados">
+      <app-product-card [producto]="producto"></app-product-card>
+    </div>
+  </div>
+</div>

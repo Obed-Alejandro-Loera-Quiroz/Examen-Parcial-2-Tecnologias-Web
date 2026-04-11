@@ -1,1 +1,55 @@
-<p>product-card works!</p>
+<div class="card h-100 shadow-sm" *ngIf="producto">
+
+  <!-- Imagen -->
+  <img
+    [src]="producto.imagen"
+    class="card-img-top"
+    [alt]="producto.nombre"
+  >
+
+  <!-- Contenido -->
+  <div class="card-body d-flex flex-column">
+
+    <!-- Nombre -->
+    <h5 class="card-title">
+      {{ producto.nombre }}
+    </h5>
+
+    <!-- Marca -->
+    <p class="card-text mb-1">
+      <strong>Marca:</strong> {{ producto.marca }}
+    </p>
+
+    <!-- Categoría -->
+    <p class="card-text mb-1">
+      <strong>Categoría:</strong> {{ producto.categoria }}
+    </p>
+
+    <!-- Descripción -->
+    <p class="card-text mb-2 text-muted">
+      {{ producto.descripcion }}
+    </p>
+
+    <!-- Precio -->
+    <p class="fw-bold fs-5 text-primary">
+      {{ producto.precio | currency:'MXN' }}
+    </p>
+
+    <!-- Disponibilidad -->
+    <p
+      class="mb-3"
+      [ngClass]="producto.disponible ? 'text-success' : 'text-danger'"
+    >
+      {{ producto.disponible ? 'Disponible' : 'Agotado' }}
+    </p>
+
+    <!-- Botón -->
+    <a
+      class="btn btn-primary mt-auto"
+      [routerLink]="['/producto', producto.id]"
+    >
+      Ver detalle
+    </a>
+
+  </div>
+</div>

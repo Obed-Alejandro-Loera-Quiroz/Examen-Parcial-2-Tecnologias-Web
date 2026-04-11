@@ -1,8 +1,11 @@
-import { Injectable } from '@angular/core';
-
-@Injectable({
-  providedIn: 'root',
-})
-export class Producto {
-  
+export interface Producto {
+  id: number;
+  nombre: string;
+  categoria: string;
+  marca: string;
+  precio: number;
+  stock: number;
+  imagen: string;
+  descripcion: string;
+  disponible: boolean;
 }
