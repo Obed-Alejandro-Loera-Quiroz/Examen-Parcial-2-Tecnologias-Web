@@ -6,8 +6,8 @@ import { ProductoService } from '../../core/services/producto.service';
 @Component({
   selector: 'app-detalle',
   standalone: false,
-  templateUrl: '../detalle/detalle.html',
-  styleUrls: ['../detalle/detalle.css']
+  templateUrl: './detalle.html',
+  styleUrls: ['./detalle.css']
 })
 export class DetalleComponent implements OnInit {
 
@@ -19,10 +19,12 @@ export class DetalleComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.route.paramMap.subscribe(params => {
+      const id = Number(params.get('id'));
 
-    this.productoService.getProductoById(id).subscribe(data => {
-      this.producto = data;
+      this.productoService.getProductoById(id).subscribe(data => {
+        this.producto = data;
+      });
     });
   }
 }
