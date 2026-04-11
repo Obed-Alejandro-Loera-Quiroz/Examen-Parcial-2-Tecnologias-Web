@@ -7,6 +7,6 @@ import { Producto } from '../../../app/core/services/producto';
   templateUrl: './product-card.html',
   styleUrls: ['./product-card.css'],
 })
-export class ProductCard {
+export class ProductCardComponent {
   @Input() producto!: Producto;
 }

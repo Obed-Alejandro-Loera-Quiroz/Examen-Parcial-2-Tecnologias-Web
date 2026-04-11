@@ -6,18 +6,18 @@
       type="text"
       class="form-control"
       placeholder="Buscar por nombre, marca o categoría"
-      [(ngModel)]="textoBusqueda"
-      (input)="filtrarProductos()"
+      [ngModel]="textoBusqueda()"
+      (ngModelChange)="textoBusqueda.set($event)"
     >
   </div>
 
-  <div *ngIf="productosFiltrados.length === 0" class="alert alert-warning">
+  <div *ngIf="productosFiltrados().length === 0" class="alert alert-warning">
     No se encontraron productos.
   </div>
 
-  <div class="row g-4" *ngIf="productosFiltrados.length > 0">
-    <div class="col-md-6 col-lg-4" *ngFor="let producto of productosFiltrados">
-      <app-product-card [producto]="producto"></app-product-card>
+  <div class="row g-4" *ngIf="productosFiltrados().length > 0" >
+    <div class="col-md-6 col-lg-4" *ngFor="let producto of productosFiltrados()" >
+      <app-product-card [producto]="producto" ></app-product-card>
     </div>
   </div>
 </div>
