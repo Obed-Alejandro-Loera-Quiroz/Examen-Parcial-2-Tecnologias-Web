@@ -4,8 +4,11 @@ import { Component } from '@angular/core';
   selector: 'app-navbar',
   standalone: false,
   templateUrl: './navbar.html',
-  styleUrl: './navbar.css',
+  styleUrls: ['./navbar.css']
 })
 export class NavbarComponent {
+
+  // Simulación de rol
+  esAdmin: boolean = true;
 
 }

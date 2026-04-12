@@ -14,6 +14,7 @@ import { CatalogoComponent } from './pages/catalogo/catalogo.component';
 import { ProductCardComponent } from './shared/product-card/product-card';
 //importar detalle component
 import { DetalleComponent } from './pages/detalle/detalle.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { DetalleComponent } from './pages/detalle/detalle.component';
     CatalogoComponent, 
     ProductCardComponent,
     DetalleComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

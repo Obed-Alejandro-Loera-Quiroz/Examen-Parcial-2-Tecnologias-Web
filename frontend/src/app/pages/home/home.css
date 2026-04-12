@@ -1,0 +1,30 @@
+.carousel-fix {
+  max-width: 1000px;
+  margin: auto;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.carousel-img {
+  height: 400px;
+  object-fit: cover;
+}
+
+/* Texto encima bien centrado */
+.carousel-caption-custom {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.6);
+  padding: 15px 25px;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+}
+
+/* Mejor contraste */
+.carousel-caption-custom h3 {
+  font-weight: bold;
+  margin-bottom: 5px;
+}

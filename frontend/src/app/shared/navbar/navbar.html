@@ -1,9 +1,23 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
   <div class="container">
-    <a class="navbar-brand" routerLink="/">MiTienda</a>
 
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav me-auto">
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold" routerLink="/">
+      PAMICELL
+    </a>
+
+    <!-- Botón responsive -->
+    <button 
+      class="navbar-toggler" 
+      type="button" 
+      data-bs-toggle="collapse" 
+      data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menú -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
 
         <li class="nav-item">
           <a class="nav-link" routerLink="/" routerLinkActive="active">Inicio</a>
@@ -21,11 +35,26 @@
           <a class="nav-link" routerLink="/contacto" routerLinkActive="active">Contacto</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/agregar" routerLinkActive="active">Agregar</a>
+        <!-- ADMIN -->
+        <li class="nav-item dropdown" *ngIf="esAdmin">
+          <a 
+            class="nav-link dropdown-toggle text-warning" 
+            role="button" 
+            data-bs-toggle="dropdown">
+            Admin
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <a class="dropdown-item" routerLink="/agregar">
+                Agregar producto
+              </a>
+            </li>
+          </ul>
         </li>
 
       </ul>
     </div>
+
   </div>
 </nav>

@@ -1,20 +1,99 @@
+<!-- HERO -->
 <div class="text-center mb-5">
-  <h1>Bienvenido a MiTienda</h1>
+  <h1 class="fw-bold display-3">
+  <span class="text-primary">PAMI</span>CELL
+</h1>
   <p class="lead">Encuentra los mejores productos al mejor precio</p>
-  <a routerLink="/catalogo" class="btn btn-primary">Ver catálogo</a>
 </div>
 
-<div class="row text-center">
-  <div class="col-md-4">
-    <h5>Calidad</h5>
-    <p>Productos seleccionados</p>
+<!-- CAROUSEL -->
+<div id="carouselHome" class="carousel slide mb-5 carousel-fix" data-bs-ride="carousel">
+
+  <div class="carousel-inner">
+
+    <div class="carousel-item active">
+      <img src="assets/banner1.jpg" class="d-block w-100 carousel-img">
+
+      <div class="carousel-caption-custom">
+        <h3>Las mejores ofertas</h3>
+        <p>Encuentra tecnología al mejor precio</p>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <img src="assets/banner2.jpg" class="d-block w-100 carousel-img">
+
+      <div class="carousel-caption-custom">
+        <h3>Productos de calidad</h3>
+        <p>Solo lo mejor para ti</p>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <img src="assets/banner3.jpg" class="d-block w-100 carousel-img">
+
+      <div class="carousel-caption-custom">
+        <h3>Compra fácil y rápido</h3>
+        <p>Entrega segura</p>
+      </div>
+    </div>
+
   </div>
-  <div class="col-md-4">
-    <h5>Precio</h5>
-    <p>Las mejores ofertas</p>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+
+</div>
+
+<!-- PRODUCTOS -->
+<h3 class="mb-4 text-center">Productos destacados</h3>
+
+<div class="row g-4 mb-5" *ngIf="productos().length > 0">
+  <div class="col-md-4" *ngFor="let p of productos().slice(0,3)">
+    <app-product-card [producto]="p"></app-product-card>
   </div>
+</div>
+
+<div *ngIf="productos().length === 0" class="alert alert-warning text-center">
+  No hay productos disponibles
+</div>
+
+
+<!-- CTA EXTRA -->
+<div class="text-center mb-5">
+  <a routerLink="/catalogo" class="btn btn-outline-dark">
+    Ver todos los productos
+  </a>
+</div>
+
+
+<!-- BENEFICIOS -->
+<div class="row text-center mt-5">
+
   <div class="col-md-4">
-    <h5>Envío</h5>
-    <p>Entrega rápida</p>
+    <div class="p-4 shadow-sm rounded bg-white">
+      <h4> Calidad</h4>
+      <p>Productos seleccionados cuidadosamente</p>
+    </div>
   </div>
+
+  <div class="col-md-4">
+    <div class="p-4 shadow-sm rounded bg-white">
+      <h4> Precio</h4>
+      <p>Las mejores ofertas del mercado</p>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="p-4 shadow-sm rounded bg-white">
+      <h4> Envío</h4>
+      <p>Entrega rápida y segura</p>
+    </div>
+  </div>
+
 </div>
