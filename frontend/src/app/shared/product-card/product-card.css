@@ -1,17 +1,49 @@
-.card {
-  border-radius: 12px;
+.product-card {
+  border-radius: 14px;
   overflow: hidden;
+  transition: all 0.25s ease;
+  position: relative;
 }
 
-.card-img-top {
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Imagen */
+.img-container {
   height: 220px;
-  object-fit: cover;
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.img-container img {
+  max-height: 90%;
+  max-width: 90%;
+  object-fit: contain;
+}
+
+/* Texto */
 .card-title {
+  font-weight: 600;
   min-height: 48px;
 }
 
 .card-text {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  min-height: 40px;
+}
+
+/* Precio */
+.price {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #0d6efd;
+}
+
+/* Badge */
+.badge {
+  font-size: 0.75rem;
 }
