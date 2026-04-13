@@ -8,4 +8,21 @@ import { Component } from '@angular/core';
 })
 export class ContactoComponent {
 
+  nombre = '';
+  correo = '';
+  asunto = '';
+  mensaje = '';
+
+  enviado = false;
+
+  enviarFormulario() {
+    console.log({
+      nombre: this.nombre,
+      correo: this.correo,
+      asunto: this.asunto,
+      mensaje: this.mensaje
+    });
+
+    this.enviado = true;
+  }
 }

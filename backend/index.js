@@ -19,12 +19,24 @@ app.get('/productos', (req,res)=>{
 });
 
 // 2 Detalles de un producto por id 
-app.get('/productos/:id',(req,res)=>{
-    const {id} = req.params;
-    db.query('SELECT * FROM productos WHERE id = ?',[id], (err, results) =>{
-        if(err) return res.status(500).send(err);
-        res.json(results[0]);
-    });
+app.get('/productos/:id', (req, res) => {
+  const { id } = req.params;
+
+  console.log('ID recibido en backend:', id);
+
+  db.query('SELECT * FROM productos WHERE id = ?', [id], (err, results) => {
+    if (err) {
+      console.error('Error en GET /productos/:id:', err);
+      return res.status(500).json({ error: 'Error del servidor' });
+    }
+
+    if (!results || results.length === 0) {
+      return res.status(404).json({ error: 'Producto no encontrado' });
+    }
+
+    console.log('Producto encontrado:', results[0]);
+    res.json(results[0]);
+  });
 });
 
 // 3. POST: Guardar mensaje de contacto (con Middleware sencillo)

@@ -15,23 +15,25 @@ import { ProductCardComponent } from './shared/product-card/product-card';
 //importar detalle component
 import { DetalleComponent } from './pages/detalle/detalle.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ContactoComponent } from './pages/contacto/contacto.component';
 
 @NgModule({
   declarations: [
     App,
     NavbarComponent,
     FooterComponent,
-    CatalogoComponent, 
+    CatalogoComponent,
     ProductCardComponent,
     DetalleComponent,
     HomeComponent,
+    ContactoComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,         // Habilita el uso de ngModel [cite: 127]
-    HttpClientModule,    // Habilita el consumo de tu backend [cite: 176, 177]
+    FormsModule,
+    HttpClientModule,
     AppRoutingModule,
-    CommonModule,        // Proporciona directivas comunes como ngIf, ngFor, etc.
+    CommonModule
   ],
   providers: [],
   bootstrap: [App]

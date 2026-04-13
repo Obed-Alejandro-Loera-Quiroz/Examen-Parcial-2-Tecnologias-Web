@@ -1,1 +1,49 @@
-<p>contacto works!</p>
+<form (ngSubmit)="enviarFormulario()" *ngIf="!enviado">
+
+  <div class="mb-3">
+    <label>Nombre</label>
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="nombre"
+      name="nombre"
+      required
+    >
+  </div>
+
+  <div class="mb-3">
+    <label>Correo</label>
+    <input
+      type="email"
+      class="form-control"
+      [(ngModel)]="correo"
+      name="correo"
+      required
+    >
+  </div>
+
+  <div class="mb-3">
+    <label>Asunto</label>
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="asunto"
+      name="asunto"
+    >
+  </div>
+
+  <div class="mb-3">
+    <label>Mensaje</label>
+    <textarea
+      class="form-control"
+      [(ngModel)]="mensaje"
+      name="mensaje"
+      required
+    ></textarea>
+  </div>
+
+  <button class="btn btn-primary" type="submit">
+    Enviar mensaje
+  </button>
+
+</form>
