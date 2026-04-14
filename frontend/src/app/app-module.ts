@@ -16,7 +16,9 @@ import { ProductCardComponent } from './shared/product-card/product-card';
 import { DetalleComponent } from './pages/detalle/detalle.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
+import { CarritoComponent } from './pages/carrito/carrito.component';
 import { RouterModule } from '@angular/router'; 
+
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { RouterModule } from '@angular/router';
     ProductCardComponent,
     DetalleComponent,
     HomeComponent,
-    ContactoComponent
+    ContactoComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,
