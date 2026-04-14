@@ -1,49 +1,41 @@
-<form (ngSubmit)="enviarFormulario()" *ngIf="!enviado">
-
-  <div class="mb-3">
-    <label>Nombre</label>
-    <input
-      type="text"
-      class="form-control"
-      [(ngModel)]="nombre"
-      name="nombre"
-      required
-    >
+<div class="container py-4">
+  <div *ngIf="mensajeConfirmacion()" class="alert" [ngClass]="enviado() ? 'alert-success' : 'alert-danger'">
+    {{ mensajeConfirmacion() }}
   </div>
 
-  <div class="mb-3">
-    <label>Correo</label>
-    <input
-      type="email"
-      class="form-control"
-      [(ngModel)]="correo"
-      name="correo"
-      required
-    >
-  </div>
+  <form #contactoForm="ngForm" (ngSubmit)="enviarFormulario(contactoForm)" *ngIf="!enviado()">
+    <div class="mb-3">
+      <label class="form-label">Nombre</label>
+      <input type="text" class="form-control" name="nombre" ngModel required>
+    </div>
 
-  <div class="mb-3">
-    <label>Asunto</label>
-    <input
-      type="text"
-      class="form-control"
-      [(ngModel)]="asunto"
-      name="asunto"
-    >
-  </div>
+    <div class="mb-3">
+      <label class="form-label">Correo electrónico</label>
+      <input type="email" class="form-control" name="correo" ngModel required email>
+    </div>
 
-  <div class="mb-3">
-    <label>Mensaje</label>
-    <textarea
-      class="form-control"
-      [(ngModel)]="mensaje"
-      name="mensaje"
-      required
-    ></textarea>
-  </div>
+    <div class="mb-3">
+      <label class="form-label">Asunto</label>
+      <input type="text" class="form-control" name="asunto" ngModel>
+    </div>
 
-  <button class="btn btn-primary" type="submit">
-    Enviar mensaje
+    <div class="mb-3">
+      <label class="form-label">Mensaje</label>
+      <textarea class="form-control" name="mensaje" rows="4" ngModel required></textarea>
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="!contactoForm.valid">
+      Enviar mensaje
+    </button>
+  </form>
+
+  <button *ngIf="enviado()" class="btn btn-outline-secondary mt-3" 
+          (click)="enviado.set(false); mensajeConfirmacion.set('')">
+    Enviar otro mensaje
   </button>
-
-</form>
+  
+  <button *ngIf="enviado()" class="btn btn-outline-secondary mt-3" 
+          (click)="enviado.set(false); mensajeConfirmacion.set('')">
+    back
+  </button>
+</div>
