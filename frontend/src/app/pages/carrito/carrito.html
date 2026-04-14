@@ -1,1 +1,47 @@
-<p>carrito works!</p>
+<div class="container py-5">
+  <h2>Tu Carrito de Compras</h2>
+
+  <div *ngIf="carritoService.totalProductos() === 0" class="alert alert-info">
+    El carrito está vacío. ¡Ve al catálogo a buscar tu nuevo celular!
+  </div>
+
+  <div class="row" *ngIf="carritoService.totalProductos() > 0">
+    <div class="col-md-8">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of carritoService.listaCarrito()">
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.precio | currency:'MXN' }}</td>
+            <td>{{ item.cantidad }}</td>
+            <td>{{ (item.precio * item.cantidad) | currency:'MXN' }}</td>
+            <td>
+              <button class="btn btn-danger btn-sm" (click)="carritoService.eliminar(item.id)">
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card p-3 shadow-sm">
+        <h4>Resumen</h4>
+        <p>Subtotal: {{ carritoService.subtotal() | currency:'MXN' }}</p>
+        <p>IVA (16%): {{ (carritoService.subtotal() * 0.16) | currency:'MXN' }}</p>
+        <hr>
+        <h3 class="text-primary">Total: {{ (carritoService.subtotal() * 1.16) | currency:'MXN' }}</h3>
+        <button class="btn btn-success w-100 mt-3">Finalizar Compra</button>
+      </div>
+    </div>
+  </div>
+</div>

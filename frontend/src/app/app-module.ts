@@ -7,7 +7,7 @@ import { FooterComponent } from './shared/footer/footer';
 import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing-module';
-import { App } from './app';
+import { AppComponent } from './app';
 
 // No olvides importar tus componentes aquí para que funcionen
 import { CatalogoComponent } from './pages/catalogo/catalogo.component';
@@ -16,26 +16,32 @@ import { ProductCardComponent } from './shared/product-card/product-card';
 import { DetalleComponent } from './pages/detalle/detalle.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
+import { CarritoComponent } from './pages/carrito/carrito.component';
+import { RouterModule } from '@angular/router'; 
+
+
 
 @NgModule({
   declarations: [
-    App,
+    AppComponent,
     NavbarComponent,
     FooterComponent,
     CatalogoComponent,
     ProductCardComponent,
     DetalleComponent,
     HomeComponent,
-    ContactoComponent
+    ContactoComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    CommonModule
+    RouterModule
   ],
   providers: [],
-  bootstrap: [App]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

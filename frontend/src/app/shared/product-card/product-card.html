@@ -44,11 +44,12 @@
   Ver detalle
 </a>
 
-      <button
-        class="btn btn-primary"
-        [disabled]="!producto.disponible">
-        Agregar al carrito
-      </button>
+  <button
+    class="btn btn-primary"
+    [disabled]="!producto.disponible"
+    (click)="agregarAlCarrito()">
+    Agregar al carrito
+  </button>
 
     </div>
 

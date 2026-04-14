@@ -2,7 +2,7 @@
 CREATE DATABASE IF NOT EXISTS pamicell_db;
 USE pamicell_db;
 
---2 tabla obligatoria de productos
+-- 2 tabla obligatoria de productos
 CREATE TABLE productos(
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE productos(
     disponible TINYINT(1) DEFAULT 1
 );
 
---3 Tabla obligatoria de mensajes de contacto 
+-- 3 Tabla obligatoria de mensajes de contacto 
 CREATE TABLE mensajes(
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE mensajes(
     mensaje TEXT NOT NULL
 );
 
---4 datos de prueba para el catalogo 
+-- 4 datos de prueba para el catalogo 
 INSERT INTO productos (nombre, categoria, marca, precio, stock, imagen, descripcion, disponible)
 VALUES
 ('Iphone 13', 'smartphones', 'Apple', 999.99, 50, 'iphone13.jpg', 'El iPhone 13 con pantalla Super Retina XDR y chip A15 Bionic.', 1),
