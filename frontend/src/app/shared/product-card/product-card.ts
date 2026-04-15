@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Producto } from '../../core/services/producto';
 import { CarritoService } from '../../core/services/carrito.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-card',
@@ -12,19 +13,26 @@ export class ProductCardComponent {
   @Input() producto!: Producto;
 
   // IMPORTANTE: Asegúrate de que diga 'public' para descartar problemas de acceso
-  constructor(public carritoService: CarritoService) {}
+  constructor(public carritoService: CarritoService) { }
 
   agregarAlCarrito(): void {
-    // 1. LOG DE PRUEBA: Si no ves esto en la consola (F12), el botón no está llamando a la función
-    console.log('Intentando agregar producto:', this.producto);
-
     if (this.producto) {
       this.carritoService.agregar(this.producto);
-      
-      // 2. ALERT DE PRUEBA: Para confirmar visualmente sin ir a otra página
-      alert(`${this.producto.nombre} añadido al carrito`);
+
+      Swal.fire({
+        toast: true,
+        position: 'top-end',
+        icon: 'success',
+        title: `${this.producto.nombre} añadido`,
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        background: '#1c1d1f',
+        color: '#fff'
+      });
+
     } else {
-      console.error('No se pudo agregar: El objeto producto está vacío');
+      console.error('Producto vacío');
     }
   }
 }
