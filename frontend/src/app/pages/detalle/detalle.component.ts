@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from '../../core/services/producto';
 import { ProductoService } from '../../core/services/producto.service';
+import { CarritoService } from '../../core/services/carrito.service';
 
 @Component({
   selector: 'app-detalle',
@@ -17,7 +18,8 @@ export class DetalleComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private productoService: ProductoService
+    private productoService: ProductoService,
+    public carritoService: CarritoService
   ) {}
 
   ngOnInit(): void {

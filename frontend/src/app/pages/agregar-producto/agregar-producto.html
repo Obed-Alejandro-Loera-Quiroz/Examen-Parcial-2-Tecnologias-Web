@@ -1,126 +1,139 @@
-<div class="container py-5 d-flex justify-content-center">
-  <div class="card shadow-lg border-0 p-4 w-100" style="max-width: 800px;">
-    <h3 class="fw-bold mb-2 text-center">Agregar producto</h3>
-    <p class="text-muted text-center mb-4">
-      Completa la información del nuevo producto
-    </p>
+<div class="container py-4 d-flex justify-content-center">
+  <div class="card shadow-lg border-0 overflow-hidden w-100" style="max-width: 1000px;">
+    
+    <div class="card-header bg-dark p-4 border-0">
+      <h3 class="fw-bold mb-0 text-white"><i class="bi bi-box-seam me-1 text-warning"></i>Agregar Producto</h3>
+      <p class="text-white-50 mb-0 small">Registra nuevos dispositivos en PAMICELL</p>
+    </div>
 
-    <form [formGroup]="productoForm" (ngSubmit)="guardarProducto()">
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label class="form-label fw-semibold">Nombre</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="nombre"
-            [ngClass]="{ 'is-invalid': f['nombre'].invalid && f['nombre'].touched }"
-          >
-          <div class="invalid-feedback">
-            El nombre es obligatorio y debe tener al menos 3 caracteres.
+    <div class="card-body p-4">
+      <form [formGroup]="productoForm" (ngSubmit)="guardarProducto()">
+        
+        <div class="row g-5"> <div class="col-12">
+            <h6 class="text-primary-custom fw-bold mb-2 border-bottom pb-1">1. Información General</h6>
+          </div>
+
+          <div class="col-md-8">
+            <label class="form-label fw-bold small text-uppercase text-muted mb-1">Nombre del Producto</label>
+            <div class="input-group input-group-sm has-validation">
+              <span class="input-group-text bg-light border-end-0"><i class="bi bi-tag"></i></span>
+              <input
+                type="text"
+                class="form-control bg-light border-start-0"
+                formControlName="nombre"
+                placeholder="Ej. iPhone 15 Pro Max"
+                [ngClass]="{ 'is-invalid': f['nombre'].invalid && f['nombre'].touched }"
+              >
+              <div class="invalid-feedback small">El nombre es obligatorio (mín. 3 caracteres).</div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-bold small text-uppercase text-muted mb-1">Marca</label>
+            <input
+              type="text"
+              class="form-control form-control-sm bg-light"
+              formControlName="marca"
+              placeholder="Ej. Apple"
+              [ngClass]="{ 'is-invalid': f['marca'].invalid && f['marca'].touched }"
+            >
+            <div class="invalid-feedback small">La marca es obligatoria.</div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold small text-uppercase text-muted mb-1">Categoría</label>
+            <select 
+              class="form-select form-select-sm bg-light" 
+              formControlName="categoria"
+              [ngClass]="{ 'is-invalid': f['categoria'].invalid && f['categoria'].touched }">
+              <option value="">Seleccionar categoría...</option>
+              <option value="Smartphones">Smartphones</option>
+              <option value="Accesorios">Accesorios</option>
+              <option value="Tablets">Tablets</option>
+            </select>
+            <div class="invalid-feedback small">Selecciona una categoría.</div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label fw-bold small text-uppercase text-muted mb-1">URL de Imagen</label>
+            <div class="input-group input-group-sm">
+              <span class="input-group-text bg-light border-end-0"><i class="bi bi-image"></i></span>
+              <input
+                type="text"
+                class="form-control bg-light border-start-0"
+                formControlName="imagen"
+                placeholder="nombre-imagen.jpg"
+                [ngClass]="{ 'is-invalid': f['imagen'].invalid && f['imagen'].touched }"
+              >
+            </div>
+          </div>
+
+          <div class="col-12 mt-4">
+            <h6 class="text-primary-custom fw-bold mb-2 border-bottom pb-1">2. Precios e Inventario</h6>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-bold small text-uppercase text-muted mb-1">Precio de Venta</label>
+            <div class="input-group input-group-sm">
+              <span class="input-group-text bg-primary-custom text-white border-0">$</span>
+              <input
+                type="number"
+                class="form-control fw-bold"
+                formControlName="precio"
+                [ngClass]="{ 'is-invalid': f['precio'].invalid && f['precio'].touched }"
+              >
+            </div>
+            <div class="invalid-feedback d-block small" *ngIf="f['precio'].invalid && f['precio'].touched">Precio mayor a 0.</div>
+          </div>
+
+          <div class="col-md-4">
+            <label class="form-label fw-bold small text-uppercase text-muted mb-1">Stock Inicial</label>
+            <input
+              type="number"
+              class="form-control form-control-sm fw-bold"
+              formControlName="stock"
+              [ngClass]="{ 'is-invalid': f['stock'].invalid && f['stock'].touched }"
+            >
+          </div>
+
+          <div class="col-md-4 d-flex align-items-end">
+            <div class="form-check form-switch pamicell-switch mb-1">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                formControlName="disponible"
+                id="disponible"
+              >
+              <label class="form-check-label fw-bold text-dark small" for="disponible">
+                Visible
+              </label>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label fw-bold small text-uppercase text-muted mb-1">Descripción Técnica</label>
+            <textarea
+              rows="2"
+              class="form-control form-control-sm bg-light"
+              formControlName="descripcion"
+              placeholder="Especificaciones del equipo..."
+              [ngClass]="{ 'is-invalid': f['descripcion'].invalid && f['descripcion'].touched }"
+            ></textarea>
+            <div class="invalid-feedback small">Mínimo 10 caracteres.</div>
           </div>
         </div>
 
-        <div class="col-md-6 mb-3">
-          <label class="form-label fw-semibold">Categoría</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="categoria"
-            [ngClass]="{ 'is-invalid': f['categoria'].invalid && f['categoria'].touched }"
+        <div class="d-grid mt-4">
+          <button
+            type="submit"
+            class="btn btn-pamicell-save fw-bold shadow-sm py-2"
+            [disabled]="cargando"
           >
-          <div class="invalid-feedback">
-            La categoría es obligatoria.
-          </div>
+            <span *ngIf="cargando" class="spinner-border spinner-border-sm me-2"></span>
+            {{ cargando ? 'GUARDANDO...' : 'REGISTRAR PRODUCTO' }}
+          </button>
         </div>
-
-        <div class="col-md-6 mb-3">
-          <label class="form-label fw-semibold">Marca</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="marca"
-            [ngClass]="{ 'is-invalid': f['marca'].invalid && f['marca'].touched }"
-          >
-          <div class="invalid-feedback">
-            La marca es obligatoria.
-          </div>
-        </div>
-
-        <div class="col-md-6 mb-3">
-          <label class="form-label fw-semibold">Precio</label>
-          <input
-            type="number"
-            class="form-control"
-            formControlName="precio"
-            [ngClass]="{ 'is-invalid': f['precio'].invalid && f['precio'].touched }"
-          >
-          <div class="invalid-feedback">
-            El precio debe ser mayor a 0.
-          </div>
-        </div>
-
-        <div class="col-md-6 mb-3">
-          <label class="form-label fw-semibold">Stock</label>
-          <input
-            type="number"
-            class="form-control"
-            formControlName="stock"
-            [ngClass]="{ 'is-invalid': f['stock'].invalid && f['stock'].touched }"
-          >
-          <div class="invalid-feedback">
-            El stock no puede ser negativo.
-          </div>
-        </div>
-
-        <div class="col-md-6 mb-3">
-          <label class="form-label fw-semibold">Imagen</label>
-          <input
-            type="text"
-            class="form-control"
-            formControlName="imagen"
-            placeholder="ejemplo.jpg o URL"
-            [ngClass]="{ 'is-invalid': f['imagen'].invalid && f['imagen'].touched }"
-          >
-          <div class="invalid-feedback">
-            La imagen es obligatoria.
-          </div>
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label fw-semibold">Descripción</label>
-        <textarea
-          rows="4"
-          class="form-control"
-          formControlName="descripcion"
-          [ngClass]="{ 'is-invalid': f['descripcion'].invalid && f['descripcion'].touched }"
-        ></textarea>
-        <div class="invalid-feedback">
-          La descripción es obligatoria y debe tener al menos 10 caracteres.
-        </div>
-      </div>
-
-      <div class="form-check form-switch mb-4">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          formControlName="disponible"
-          id="disponible"
-        >
-        <label class="form-check-label" for="disponible">
-          Producto disponible
-        </label>
-      </div>
-
-      <div class="d-grid">
-        <button
-          type="submit"
-          class="btn btn-primary btn-lg fw-semibold"
-          [disabled]="cargando"
-        >
-          {{ cargando ? 'Guardando...' : 'Guardar producto' }}
-        </button>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </div>

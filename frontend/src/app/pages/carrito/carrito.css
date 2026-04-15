@@ -1,14 +1,101 @@
+/* COLORES PAMICELL */
+:root {
+  --pamicell-yellow: #ffc107; /* El amarillo del navbar */
+  --pamicell-dark: #0f172a;
+}
+
+/* Badge de ítems arriba */
+.badge-pamicell {
+  background-color: var(--pamicell-yellow);
+  color: #ffc107;
+  padding: 0.6rem 1.2rem;
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+
+.btn-pamicell-action {
+  background-color: var(--pamicell-yellow);
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.btn-pamicell-action:hover {
+  background-color: #2563eb;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+/* Estilo del Selector de Cantidad */
+.qty-selector {
+  background: #f8f9fa;
+  border-radius: 50px;
+  padding: 5px;
+  border: 1px solid #e9ecef;
+}
+
+.btn-qty {
+  width: 32px;
+  height: 32px;
+  border-radius: 50% !important;
+  background: white;
+  border: none;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: all 0.2s;
+}
+
+.btn-qty:hover {
+  background: var(--pamicell-dark);
+  color: white;
+}
+
+/* Tarjeta de Resumen sticky */
 .resumen-box {
-  border-radius: 12px;
-  background-color: #f8f9fa;
+  position: sticky;
+  top: 100px;
+  border-radius: 20px;
 }
 
-.card {
-  border-radius: 12px;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+.item-carrito {
+  border-radius: 15px;
+  transition: transform 0.2s;
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+.item-carrito:hover {
+  transform: scale(1.01);
+}
+
+.btn-remove {
+  color: #adb5bd;
+  border: none;
+  background: none;
+  transition: color 0.2s;
+}
+
+.btn-remove:hover {
+  color: #dc3545;
+}
+
+.small-text {
+  font-size: 0.85rem;
+}
+
+.fw-black {
+  font-weight: 900;
+}
+
+/* Animación de entrada */
+.animate-fade-in {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }

@@ -33,27 +33,36 @@ export class CarritoService {
   // =========================
 
   agregar(producto: any) {
-    const actual = this.productos();
-    const existe = actual.find(p => p.id === producto.id);
-
-    if (existe) {
-      existe.cantidad++;
-      this.productos.set([...actual]);
-    } else {
-      this.productos.set([
-        ...actual,
-        { ...producto, cantidad: 1 }
-      ]);
-    }
-
+    this.productos.update(actual => {
+      const existe = actual.find(p => p.id === producto.id);
+      if (existe) {
+        existe.cantidad++;
+        return [...actual];
+      }
+      return [...actual, { ...producto, cantidad: 1 }];
+    });
     this.guardarEnStorage();
   }
 
-  eliminar(id: number) {
-    this.productos.update(p =>
-      p.filter(item => item.id !== id)
-    );
+  // NUEVO: Para el botón "-" (Resta 1 o elimina si llega a 0)
+  eliminarUno(id: number) {
+    this.productos.update(actual => {
+      const item = actual.find(p => p.id === id);
+      if (item && item.cantidad > 1) {
+        item.cantidad--;
+        return [...actual];
+      }
+      // Si la cantidad es 1 y picas "-", se borra el producto
+      return actual.filter(p => p.id !== id);
+    });
+    this.guardarEnStorage();
+  }
 
+  // RENOMBRADO: Para el botón de "Bote de basura" (Borra todo el pack)
+  eliminarTodo(id: number) {
+    this.productos.update(actual => 
+      actual.filter(item => item.id !== id)
+    );
     this.guardarEnStorage();
   }
 
@@ -75,9 +84,12 @@ export class CarritoService {
 
   private cargarDesdeStorage() {
     const data = localStorage.getItem(this.storageKey);
-
     if (data) {
-      this.productos.set(JSON.parse(data));
+      try {
+        this.productos.set(JSON.parse(data));
+      } catch (e) {
+        console.error("Error cargando carrito", e);
+      }
     }
   }
 }

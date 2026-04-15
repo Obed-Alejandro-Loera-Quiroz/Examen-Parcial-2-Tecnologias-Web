@@ -1,89 +1,98 @@
 <div class="container py-5">
-  <h2 class="fw-bold display-6 mb-4">Carrito de Compras</h2>
+  <div class="d-flex align-items-center mb-4">
+    <h2 class="fw-bold display-6 mb-0 text-dark">Mi Carrito</h2>
+    <span class="badge badge-pamicell ms-3 rounded-pill">
+      {{ carritoService.totalProductos() }} ítems
+    </span>
+  </div>
 
-  <!-- Carrito vacío -->
-  <div *ngIf="carritoService.totalProductos() === 0" 
-       class="alert alert-light text-center border">
-    <p class="mb-0">No tienes productos en tu carrito.</p>
+  <div *ngIf="carritoService.totalProductos() === 0" class="text-center py-5 animate-fade-in">
+    <div class="mb-4">
+      <i class="bi bi-cart-x text-muted" style="font-size: 5rem;"></i>
+    </div>
+    <h4 class="text-muted">Tu carrito está vacío</h4>
+    <p class="text-secondary mb-4">¡Parece que aún no has añadido nada de tecnología!</p>
+    <a routerLink="/catalogo" class="btn btn-outline-dark px-4 py-2">Explorar catálogo</a>
   </div>
 
   <div class="row g-4" *ngIf="carritoService.totalProductos() > 0">
-
-    <!-- LISTA DE PRODUCTOS -->
     <div class="col-lg-8">
+      <div class="card shadow-sm border-0 mb-3 item-carrito" *ngFor="let item of carritoService.listaCarrito()">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-center flex-wrap gap-3">
+            
+            <div class="flex-grow-1">
+              <h5 class="mb-1 fw-bold text-dark">{{ item.nombre }}</h5>
+              <div class="d-flex align-items-center">
+                <span class="text-primary fw-semibold">{{ item.precio | currency:'MXN' }}</span>
+                <span class="mx-2 text-muted">|</span>
+                <small class="text-muted">Unitario</small>
+              </div>
+            </div>
 
-      <div class="card shadow-sm border-0 mb-3"
-           *ngFor="let item of carritoService.listaCarrito()">
+            <div class="qty-selector d-flex align-items-center shadow-sm">
+              <button class="btn btn-qty" (click)="carritoService.eliminarUno(item.id)">-</button>
+              <span class="qty-number px-3 fw-bold">{{ item.cantidad }}</span>
+              <button class="btn btn-qty" (click)="carritoService.agregar(item)">+</button>
+            </div>
 
-        <div class="card-body d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div class="text-end ms-lg-4" style="min-width: 120px;">
+              <div class="small text-muted mb-1">Subtotal</div>
+              <span class="fw-bold fs-5 text-dark">
+                {{ (item.precio * item.cantidad) | currency:'MXN' }}
+              </span>
+            </div>
 
-          <!-- INFO -->
-          <div class="flex-grow-1">
-            <h5 class="mb-1 fw-semibold">{{ item.nombre }}</h5>
-            <small class="text-muted">
-              Precio unitario: {{ item.precio | currency:'MXN' }}
-            </small>
+            <button class="btn btn-remove ms-2" (click)="carritoService.eliminarTodo(item.id)" title="Eliminar del carrito">
+              <i class="bi bi-trash3"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card shadow-lg border-0 resumen-box overflow-hidden">
+        <div class="resumen-header p-4 text-white bg-dark">
+          <h5 class="fw-bold mb-0">Resumen de Orden</h5>
+        </div>
+        
+        <div class="p-4 bg-white">
+          <div class="d-flex justify-content-between mb-3">
+            <span class="text-muted">Subtotal productos</span>
+            <span class="fw-semibold">{{ carritoService.subtotal() | currency:'MXN' }}</span>
           </div>
 
-          <!-- CANTIDAD -->
-          <div class="d-flex align-items-center gap-2">
-            <button class="btn btn-outline-secondary btn-sm px-3"
-              (click)="carritoService.agregar(item)">
-              +
-            </button>
-
-            <span class="fw-semibold">{{ item.cantidad }}</span>
-
-            <button class="btn btn-outline-danger btn-sm px-3"
-              (click)="carritoService.eliminar(item.id)">
-              Eliminar
-            </button>
+          <div class="d-flex justify-content-between mb-3">
+            <div class="text-muted">
+              IVA <small class="badge bg-light text-dark border">16%</small>
+            </div>
+            <span class="fw-semibold">{{ (carritoService.subtotal() * 0.16) | currency:'MXN' }}</span>
           </div>
 
-          <!-- SUBTOTAL -->
-          <div class="text-end">
-            <span class="fw-bold text-primary fs-6">
-              {{ (item.precio * item.cantidad) | currency:'MXN' }}
+          <div class="d-flex justify-content-between mb-3 text-success">
+            <span>Envío</span>
+            <span class="fw-bold">GRATIS</span>
+          </div>
+
+          <hr class="my-4 opacity-10">
+
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <span class="h5 fw-bold mb-0">Total a pagar</span>
+            <span class="h4 fw-black text-dark mb-0">
+              {{ (carritoService.subtotal() * 1.16) | currency:'MXN' }}
             </span>
           </div>
 
+          <button class="btn btn-pamicell-action w-100 fw-bold py-3 shadow-btn" (click)="finalizarCompra()">
+            FINALIZAR COMPRA <i class="bi bi-credit-card ms-2"></i>
+          </button>
+          
+          <div class="text-center mt-3">
+            <small class="text-muted small-text"><i class="bi bi-shield-lock me-1"></i> Pago 100% seguro</small>
+          </div>
         </div>
       </div>
-
     </div>
-
-    <!-- RESUMEN -->
-    <div class="col-lg-4">
-      <div class="card shadow-sm border-0 p-4 resumen-box">
-
-        <h5 class="fw-bold mb-4">Resumen de compra</h5>
-
-        <div class="d-flex justify-content-between mb-2">
-          <span class="text-muted">Subtotal</span>
-          <span>{{ carritoService.subtotal() | currency:'MXN' }}</span>
-        </div>
-
-        <div class="d-flex justify-content-between mb-3">
-          <span class="text-muted">IVA (16%)</span>
-          <span>{{ (carritoService.subtotal() * 0.16) | currency:'MXN' }}</span>
-        </div>
-
-        <hr>
-
-        <div class="d-flex justify-content-between fw-bold fs-5 mb-3">
-          <span>Total</span>
-          <span class="text-primary">
-            {{ (carritoService.subtotal() * 1.16) | currency:'MXN' }}
-          </span>
-        </div>
-
-        <button class="btn btn-success w-100 fw-semibold py-2"
-          (click)="finalizarCompra()">
-          Finalizar compra
-        </button>
-
-      </div>
-    </div>
-
   </div>
 </div>

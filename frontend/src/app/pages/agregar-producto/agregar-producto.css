@@ -1,14 +1,69 @@
+/* Variables de marca */
+:root {
+  --pamicell-blue: #2563eb;
+  --pamicell-yellow: #ffc107;
+}
+
+.text-primary-custom { color: var(--pamicell-blue); }
+.bg-primary-custom { background-color: var(--pamicell-blue); }
+
 .card {
-  border-radius: 16px;
+  border-radius: 15px; /* Bordes un poco más discretos */
 }
 
-.form-control,
-.form-check-input {
+.card-header {
+  border-bottom: 3px solid var(--pamicell-yellow) !important;
+}
+
+/* Inputs reducidos para ocupar menos espacio vertical */
+.form-control-sm, .form-select-sm, .input-group-text {
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem; /* Padding reducido */
+  border: 1px solid #e2e8f0;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--pamicell-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  background-color: #fff;
+}
+
+/* Switch compacto */
+.pamicell-switch .form-check-input {
+  width: 2.5em;
+  height: 1.25em;
+  cursor: pointer;
+}
+
+.pamicell-switch .form-check-input:checked {
+  background-color: var(--pamicell-blue);
+  border-color: var(--pamicell-blue);
+}
+
+/* Botón de Guardar Compacto */
+.btn-pamicell-save {
+  background-color: var(--pamicell-yellow);
+  color: #000;
+  border: none;
   border-radius: 10px;
+  padding: 0.75rem; /* Botón menos alto */
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
 }
 
-.form-control:focus,
-.form-check-input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 0.18rem rgba(37, 99, 235, 0.15);
+.btn-pamicell-save:hover:not(:disabled) {
+  background-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+  color: white;
+}
+
+.btn-pamicell-save:disabled {
+  background-color: #f1f5f9;
+  color: #94a3b8;
+}
+
+.invalid-feedback {
+  font-size: 0.75rem;
 }

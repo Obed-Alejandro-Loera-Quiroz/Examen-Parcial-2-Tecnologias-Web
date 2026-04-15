@@ -1,45 +1,70 @@
-<div class="container py-4">
-
-  <div *ngIf="cargando" class="alert alert-info">
-    Cargando producto...
+<div class="container py-5">
+  <div *ngIf="cargando" class="text-center py-5 animate-fade-in">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-3 text-muted fw-bold">Buscando lo mejor de la tecnología para ti...</p>
   </div>
 
-  <div *ngIf="error" class="alert alert-danger">
-    {{ error }}
+  <div *ngIf="error" class="alert alert-custom-danger shadow-sm border-0 d-flex align-items-center" role="alert">
+    <i class="bi bi-exclamation-triangle-fill me-3 fs-4"></i>
+    <div>{{ error }}</div>
   </div>
 
-  <div class="row" *ngIf="producto">
-    <div class="col-md-5">
-      <img
-        [src]="getImagenUrl(producto.imagen)"
-        [alt]="producto.nombre"
-        class="img-fluid rounded shadow"
-      >
+  <div class="row g-5 align-items-center" *ngIf="producto">
+    <div class="col-md-6 col-lg-5">
+      <div class="image-wrapper shadow-lg rounded-4 overflow-hidden position-relative">
+        <img
+          [src]="getImagenUrl(producto.imagen)"
+          [alt]="producto.nombre"
+          class="img-fluid product-img-zoom"
+        >
+        <span *ngIf="!producto.disponible" class="sold-out-badge">Agotado</span>
+      </div>
     </div>
 
-    <div class="col-md-7">
-      <h2 class="mb-3">{{ producto.nombre }}</h2>
+    <div class="col-md-6 col-lg-7">
+      <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/" class="text-decoration-none text-primary-custom">Inicio</a></li>
+          <li class="breadcrumb-item active">{{ producto.categoria }}</li>
+        </ol>
+      </nav>
 
-      <p><strong>Marca:</strong> {{ producto.marca }}</p>
-      <p><strong>Categoría:</strong> {{ producto.categoria }}</p>
-      <p><strong>Precio:</strong> {{ producto.precio | currency:'MXN' }}</p>
-      <p><strong>Stock:</strong> {{ producto.stock }}</p>
+      <h1 class="display-5 fw-black text-dark mb-2">{{ producto.nombre }}</h1>
+      <p class="text-muted fs-5 mb-4">{{ producto.marca }}</p>
 
-      <p>
-        <strong>Disponibilidad:</strong>
-        <span [ngClass]="producto.disponible ? 'text-success' : 'text-danger'">
-          {{ producto.disponible ? 'Disponible' : 'Agotado' }}
-        </span>
-      </p>
+      <div class="price-container d-flex align-items-baseline mb-4">
+        <span class="h2 fw-bold text-primary-custom mb-0">{{ producto.precio | currency:'MXN' }}</span>
+        <span class="ms-2 text-muted small">IVA incluido</span>
+      </div>
 
-      <hr>
+      <div class="specs-grid mb-4">
+        <div class="spec-item">
+          <span class="spec-label text-muted">Stock</span>
+          <span class="spec-value fw-bold text-dark">{{ producto.stock }} unidades</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label text-muted">Estado</span>
+          <span class="spec-value fw-bold" [ngClass]="producto.disponible ? 'text-success' : 'text-danger'">
+            {{ producto.disponible ? 'Disponible' : 'Sin existencias' }}
+          </span>
+        </div>
+      </div>
 
-      <h5>Descripción del producto</h5>
-      <p>{{ producto.descripcion }}</p>
+      <hr class="my-4 opacity-10">
 
-      <button class="btn btn-primary" [disabled]="!producto.disponible">
-        Agregar al carrito
-      </button>
+      <div class="description-section mb-5">
+        <h5 class="fw-bold text-dark mb-3">Descripción del producto</h5>
+        <p class="text-muted lh-lg">{{ producto.descripcion }}</p>
+      </div>
+
+      <div class="action-section">
+        <button 
+          class="btn btn-pamicell-action btn-lg px-5 py-3 shadow-btn w-100 w-md-auto" 
+          [disabled]="!producto.disponible"
+          (click)="carritoService.agregar(producto)">
+          <i class="bi bi-cart-plus me-2"></i> AGREGAR AL CARRITO
+        </button>
+      </div>
     </div>
   </div>
 </div>

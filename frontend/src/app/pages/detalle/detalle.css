@@ -1,5 +1,106 @@
-img {
-  max-height: 400px;
-  object-fit: cover;
+/* Paleta de Colores de PAMICELL */
+.text-primary-custom { color: #2563eb; }
+.fw-black { font-weight: 900; letter-spacing: -1px; }
+
+/* Imagen con efecto de profundidad */
+.image-wrapper {
+  background-color: #f8f9fa;
+  border: 1px solid #eee;
+  transition: all 0.3s ease;
+}
+
+.product-img-zoom {
+  max-height: 500px;
   width: 100%;
+  object-fit: contain;
+  padding: 20px;
+  transition: transform 0.5s ease;
+}
+
+.image-wrapper:hover .product-img-zoom {
+  transform: scale(1.05);
+}
+
+/* Badge de agotado sobre la imagen */
+.sold-out-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(220, 53, 69, 0.9);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+/* Rejilla de especificaciones */
+.specs-grid {
+  display: flex;
+  gap: 30px;
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.spec-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Botón de acción con el amarillo del navbar */
+.btn-pamicell-action {
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-pamicell-action:hover:not(:disabled) {
+  background-color: #000000;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.btn-pamicell-action:disabled {
+  background-color: #e9ecef;
+  color: #adb5bd;
+}
+
+/* Alert personalizada */
+.alert-custom-danger {
+  background-color: #fff5f5;
+  color: #e53e3e;
+  border-left: 5px solid #e53e3e;
+  border-radius: 10px;
+}
+
+/* Breadcrumbs */
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "›";
+}
+
+/* Animaciones */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .specs-grid {
+    flex-direction: column;
+    gap: 15px;
+  }
 }
