@@ -69,6 +69,70 @@ app.post('/contacto', (req, res) => {
     });
 });
 
+// POST: Agregar producto
+app.post('/productos', (req, res) => {
+  const {
+    nombre,
+    categoria,
+    marca,
+    precio,
+    stock,
+    imagen,
+    descripcion,
+    disponible
+  } = req.body;
+
+  // Validaciones básicas
+  if (!nombre || !precio) {
+    return res.status(400).json({
+      error: 'Los campos nombre y precio son obligatorios'
+    });
+  }
+
+  if (Number(precio) <= 0) {
+    return res.status(400).json({
+      error: 'El precio debe ser mayor a 0'
+    });
+  }
+
+  if (stock != null && Number(stock) < 0) {
+    return res.status(400).json({
+      error: 'El stock no puede ser negativo'
+    });
+  }
+
+  const query = `
+    INSERT INTO productos
+    (nombre, categoria, marca, precio, stock, imagen, descripcion, disponible)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  const values = [
+    nombre,
+    categoria || '',
+    marca || '',
+    Number(precio),
+    Number(stock) || 0,
+    imagen || '',
+    descripcion || '',
+    disponible ? 1 : 0
+  ];
+
+  db.query(query, values, (err, result) => {
+    if (err) {
+      console.error('Error al insertar producto:', err);
+      return res.status(500).json({
+        error: 'Error al guardar el producto en la base de datos'
+      });
+    }
+
+    res.status(201).json({
+      mensaje: 'Producto agregado correctamente',
+      id: result.insertId
+    });
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);

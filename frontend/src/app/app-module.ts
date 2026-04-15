@@ -1,42 +1,42 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser'; // FALTA ESTE
-import { FormsModule } from '@angular/forms'; // FALTA ESTE (Para el Two-way binding) [cite: 127]
-import { HttpClientModule } from '@angular/common/http'; // Para la API [cite: 177]
-import { NavbarComponent } from './shared/navbar/navbar';
-import { FooterComponent } from './shared/footer/footer';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing-module';
 import { AppComponent } from './app';
 
-// No olvides importar tus componentes aquí para que funcionen
-import { CatalogoComponent } from './pages/catalogo/catalogo.component';
+import { NavbarComponent } from './shared/navbar/navbar';
+import { FooterComponent } from './shared/footer/footer';
 import { ProductCardComponent } from './shared/product-card/product-card';
-//importar detalle component
-import { DetalleComponent } from './pages/detalle/detalle.component';
+
 import { HomeComponent } from './pages/home/home.component';
+import { CatalogoComponent } from './pages/catalogo/catalogo.component';
+import { DetalleComponent } from './pages/detalle/detalle.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
-import { RouterModule } from '@angular/router'; 
-
-
+import { AgregarProductoComponent } from './pages/agregar-producto/agregar-producto.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    CatalogoComponent,
     ProductCardComponent,
-    DetalleComponent,
     HomeComponent,
+    CatalogoComponent,
+    DetalleComponent,
     ContactoComponent,
-    CarritoComponent
+    CarritoComponent,
+    AgregarProductoComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     RouterModule

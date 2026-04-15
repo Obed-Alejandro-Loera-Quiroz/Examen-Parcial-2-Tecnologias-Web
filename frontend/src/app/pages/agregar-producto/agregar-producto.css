@@ -1,0 +1,14 @@
+.card {
+  border-radius: 16px;
+}
+
+.form-control,
+.form-check-input {
+  border-radius: 10px;
+}
+
+.form-control:focus,
+.form-check-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 0.18rem rgba(37, 99, 235, 0.15);
+}

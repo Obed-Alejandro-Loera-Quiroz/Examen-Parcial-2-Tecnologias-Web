@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CarritoService } from '../../core/services/carrito.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +9,6 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
-  // Simulación de rol
-  esAdmin: boolean = true;
+  constructor(public carritoService: CarritoService) {}
 
 }

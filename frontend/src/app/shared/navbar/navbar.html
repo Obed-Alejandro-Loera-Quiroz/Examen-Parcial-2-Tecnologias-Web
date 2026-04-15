@@ -1,56 +1,52 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-  <div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3"> <div class="container">
 
-    <!-- Logo -->
-    <a class="navbar-brand fw-bold" routerLink="/">
+    <a class="navbar-brand fw-bold ls-tight" routerLink="/">
       PAMICELL
     </a>
 
-    <!-- Botón responsive -->
     <button 
-      class="navbar-toggler" 
+      class="navbar-toggler border-0" 
       type="button" 
       data-bs-toggle="collapse" 
       data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Menú -->
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
 
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active">Inicio</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/catalogo" routerLinkActive="active">Catálogo</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/carrito" routerLinkActive="active">Carrito</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/contacto" routerLinkActive="active">Contacto</a>
-        </li>
-
-        <!-- ADMIN -->
-        <li class="nav-item dropdown" *ngIf="esAdmin">
-          <a 
-            class="nav-link dropdown-toggle text-warning" 
-            role="button" 
-            data-bs-toggle="dropdown">
-            Admin
+        <li class="nav-item px-lg-2"> <a class="nav-link custom-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            Inicio
           </a>
+        </li>
 
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li>
-              <a class="dropdown-item" routerLink="/agregar">
-                Agregar producto
-              </a>
-            </li>
-          </ul>
+        <li class="nav-item px-lg-2">
+          <a class="nav-link custom-link" routerLink="/catalogo" routerLinkActive="active">
+            Catálogo
+          </a>
+        </li>
+
+        <li class="nav-item px-lg-2">
+          <a class="nav-link position-relative d-inline-flex align-items-center" routerLink="/carrito" routerLinkActive="active">
+            <span>Carrito</span>
+            <span 
+              *ngIf="carritoService.totalProductos() > 0"
+              class="badge-custom">
+              {{ carritoService.totalProductos() }}
+            </span>
+          </a>
+        </li>
+
+        <li class="nav-item px-lg-2">
+          <a class="nav-link custom-link" routerLink="/contacto" routerLinkActive="active">
+            Contacto
+          </a>
+        </li>
+
+        <li class="nav-item ms-lg-4 mt-3 mt-lg-0">
+          <a class="btn btn-add-product" routerLink="/agregar">
+            <i class="bi bi-plus-lg me-1"></i> Agregar producto
+          </a>
         </li>
 
       </ul>
