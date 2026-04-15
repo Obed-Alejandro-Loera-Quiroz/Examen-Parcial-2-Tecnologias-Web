@@ -1,41 +1,95 @@
-<div class="container py-4">
-  <div *ngIf="mensajeConfirmacion()" class="alert" [ngClass]="enviado() ? 'alert-success' : 'alert-danger'">
-    {{ mensajeConfirmacion() }}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-12 col-xl-10">
+      
+      <div class="card border-0 shadow-sm overflow-hidden custom-contact-card">
+        <div class="row g-0">
+          
+          <div class="col-md-5 bg-primary text-white p-5 d-flex flex-column justify-content-center">
+            <h3 class="fw-bold mb-4">Hablemos</h3>
+            <p class="opacity-75">Tienes alguna queja o sugerencia de nuestros productos. Con gusto recibimos recomendaciones</p>
+            
+            <div class="mt-4">
+              <div class="d-flex align-items-center mb-3">
+                <div class="icon-circle me-3"><i class="bi bi-envelope"></i></div>
+                <span>pamicelluaa51@gmail.com</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <div class="icon-circle me-3"><i class="bi bi-geo-alt"></i></div>
+                <span>Universidad Autonoma de Aguascalientes, Ags</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-7 p-5 bg-white">
+            <h3 class="fw-bold text-dark mb-4">Contacto</h3>
+
+            <div *ngIf="mensajeConfirmacion()" 
+                 class="alert border-0 shadow-sm text-start py-3"
+                 [ngClass]="enviado() ? 'alert-light-success' : 'alert-light-danger'">
+              <i class="bi" [ngClass]="enviado() ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill'"></i>
+              <span class="ms-2">{{ mensajeConfirmacion() }}</span>
+            </div>
+
+            <form #contactoForm="ngForm" (ngSubmit)="enviarFormulario(contactoForm)" *ngIf="!enviado()">
+              
+              <div class="row">
+                <div class="col-md-12 mb-4">
+                  <label class="form-label small fw-bold text-uppercase text-muted">Nombre Completo</label>
+                  <input type="text" class="form-control form-control-lg custom-input" 
+                         name="nombre" ngModel required #nombre="ngModel" placeholder="Ej. Osvaldo Serna">
+                  <div class="invalid-feedback-custom" *ngIf="nombre.invalid && nombre.touched">
+                    El nombre es necesario.
+                  </div>
+                </div>
+
+                <div class="col-md-12 mb-4">
+                  <label class="form-label small fw-bold text-uppercase text-muted">Correo Electrónico</label>
+                  <input type="email" class="form-control form-control-lg custom-input" 
+                         name="correo" ngModel required email #correo="ngModel" placeholder="nombre@correo.com">
+                  <div class="invalid-feedback-custom" *ngIf="correo.invalid && correo.touched">
+                    Ingresa un correo electrónico válido.
+                  </div>
+                </div>
+
+                <div class="col-md-12 mb-4">
+                  <label class="form-label small fw-bold text-uppercase text-muted">Asunto (Opcional)</label>
+                  <input type="text" class="form-control form-control-lg custom-input" 
+                         name="asunto" ngModel placeholder="¿En qué podemos ayudarte?">
+                </div>
+
+                <div class="col-md-12 mb-4">
+                  <label class="form-label small fw-bold text-uppercase text-muted">Mensaje</label>
+                  <textarea class="form-control form-control-lg custom-input" 
+                            name="mensaje" rows="4" ngModel required #mensaje="ngModel"
+                            placeholder="Escribe tu mensaje aquí..."></textarea>
+                </div>
+
+                <div class="col-md-12">
+                  <button class="btn btn-primary btn-lg w-100 fw-bold py-3 shadow-sm btn-submit" 
+                          type="submit" [disabled]="!contactoForm.valid || cargando()">
+                    <span *ngIf="!cargando()">Enviar Mensaje</span>
+                    <span *ngIf="cargando()" class="spinner-border spinner-border-sm me-2"></span>
+                    <span *ngIf="cargando()">Enviando...</span>
+                  </button>
+                </div>
+              </div>
+
+            </form>
+
+            <div *ngIf="enviado()" class="text-center py-4">
+              <div class="mb-4">
+                <i class="bi bi-send-check text-success display-1"></i>
+              </div>
+              <button class="btn btn-outline-primary px-4" (click)="enviado.set(false); mensajeConfirmacion.set('')">
+                Enviar otro mensaje
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
-
-  <form #contactoForm="ngForm" (ngSubmit)="enviarFormulario(contactoForm)" *ngIf="!enviado()">
-    <div class="mb-3">
-      <label class="form-label">Nombre</label>
-      <input type="text" class="form-control" name="nombre" ngModel required>
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">Correo electrónico</label>
-      <input type="email" class="form-control" name="correo" ngModel required email>
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">Asunto</label>
-      <input type="text" class="form-control" name="asunto" ngModel>
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">Mensaje</label>
-      <textarea class="form-control" name="mensaje" rows="4" ngModel required></textarea>
-    </div>
-
-    <button class="btn btn-primary" type="submit" [disabled]="!contactoForm.valid">
-      Enviar mensaje
-    </button>
-  </form>
-
-  <button *ngIf="enviado()" class="btn btn-outline-secondary mt-3" 
-          (click)="enviado.set(false); mensajeConfirmacion.set('')">
-    Enviar otro mensaje
-  </button>
-  
-  <button *ngIf="enviado()" class="btn btn-outline-secondary mt-3" 
-          (click)="enviado.set(false); mensajeConfirmacion.set('')">
-    back
-  </button>
 </div>
