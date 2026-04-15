@@ -1,69 +1,137 @@
-/* Variables de marca */
+/* Variables de marca y refinamiento */
 :root {
   --pamicell-blue: #2563eb;
+  --pamicell-blue-dark: #1e40af;
   --pamicell-yellow: #ffc107;
+  --pamicell-gray-bg: #f8fafc;
 }
+/* 1. Reducir el espacio de la cabecera */
+.card-header {
+  padding: 1rem 1.5rem !important; /* Antes era p-4 (1.5rem) */
+  background-color: #212529 !important; 
+}
+
+/* 2. Reducir el espacio interno del cuerpo (Card Body) */
+.card-body {
+  padding: 1.5rem 2rem !important; /* Antes era p-5 */
+}
+
+/* 3. Reducir la altura de los inputs y el espacio entre filas */
+.form-control, .form-select {
+  padding: 0.4rem 0.8rem; /* Inputs más delgados */
+  font-size: 0.9rem;
+}
+
+/* 4. Reducir el margen de las filas (g-4 a g-3 o g-2) */
+.row.g-4 {
+  --bs-gutter-y: 1rem; /* Reduce el espacio vertical entre campos */
+}
+
+/* 5. Compactar los títulos de sección (los que tienen el badge 1 y 2) */
+.mt-5 {
+  margin-top: 1.5rem !important; /* Reduce el salto entre sección 1 y 2 */
+}
+
+/* Tipografía y Espaciado General */
+.tracking-widest { letter-spacing: 0.1em; }
+.tracking-wider { letter-spacing: 0.05em; }
 
 .text-primary-custom { color: var(--pamicell-blue); }
 .bg-primary-custom { background-color: var(--pamicell-blue); }
 
+/* Tarjeta y Contenedores */
 .card {
-  border-radius: 15px; /* Bordes un poco más discretos */
+  border-radius: 1.25rem;
+  transition: transform 0.3s ease;
 }
 
-.card-header {
-  border-bottom: 3px solid var(--pamicell-yellow) !important;
-}
 
-/* Inputs reducidos para ocupar menos espacio vertical */
-.form-control-sm, .form-select-sm, .input-group-text {
-  border-radius: 8px;
-  padding: 0.5rem 0.75rem; /* Padding reducido */
+/* Estilización de Inputs */
+.form-control, .form-select {
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
   border: 1px solid #e2e8f0;
+  font-size: 0.95rem;
+  transition: all 0.2s ease-in-out;
 }
 
 .form-control:focus, .form-select:focus {
-  border-color: var(--pamicell-blue);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-  background-color: #fff;
+  border-color: black;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+  background-color: #ffffff !important;
 }
 
-/* Switch compacto */
+.input-group-text {
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+/* Switch Estilo Moderno */
 .pamicell-switch .form-check-input {
-  width: 2.5em;
-  height: 1.25em;
+  width: 3em;
+  height: 1.5em;
+  margin-top: 0;
   cursor: pointer;
 }
 
 .pamicell-switch .form-check-input:checked {
-  background-color: var(--pamicell-blue);
+  background-color: #2563eb;
   border-color: var(--pamicell-blue);
 }
 
-/* Botón de Guardar Compacto */
+/* Botón de Guardar Principal */
 .btn-pamicell-save {
-  background-color: var(--pamicell-yellow);
-  color: #000;
+  background-color:#2563eb;
+  color: white;
   border: none;
-  border-radius: 10px;
-  padding: 0.75rem; /* Botón menos alto */
+  border-radius: 12px;
   letter-spacing: 0.5px;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-pamicell-save:hover:not(:disabled) {
-  background-color: #2563eb;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
-  color: white;
+  background-color: var(--pamicell-blue);
+  color: #2563eb;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+}
+
+.btn-pamicell-save:active {
+  transform: translateY(-1px);
 }
 
 .btn-pamicell-save:disabled {
-  background-color: #f1f5f9;
+  background-color: #e2e8f0;
   color: #94a3b8;
+  cursor: not-allowed;
 }
 
+/* Botón Cancelar */
+.btn-outline-secondary {
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  color: #64748b;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #334155;
+}
+
+/* Validaciones y Errores */
 .invalid-feedback {
-  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 0.4rem;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sombras Personalizadas */
+.shadow-lg {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
 }

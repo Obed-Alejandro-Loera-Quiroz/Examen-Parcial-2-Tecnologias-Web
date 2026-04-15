@@ -19,7 +19,8 @@ export class ProductoService {
     return this.http.get<Producto>(`${this.apiUrl}/${id}`);
   }
 
-  addProducto(producto: Omit<Producto, 'id'>): Observable<any> {
+addProducto(producto: Omit<Producto, 'id'>): Observable<any> {
+    // Enviamos el objeto JSON directamente
     return this.http.post(this.apiUrl, producto);
   }
 }

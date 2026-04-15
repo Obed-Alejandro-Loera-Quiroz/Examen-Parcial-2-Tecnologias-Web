@@ -25,7 +25,7 @@ export class AgregarProductoComponent {
       marca: ['', Validators.required],
       precio: [null, [Validators.required, Validators.min(1)]],
       stock: [0, [Validators.required, Validators.min(0)]],
-      imagen: ['', Validators.required],
+      imagen: ['', Validators.required], // Aquí el usuario escribirá el nombre o URL
       descripcion: ['', [Validators.required, Validators.minLength(10)]],
       disponible: [true, Validators.required]
     });
@@ -38,42 +38,37 @@ export class AgregarProductoComponent {
   guardarProducto(): void {
     if (this.productoForm.invalid) {
       this.productoForm.markAllAsTouched();
-
-      Swal.fire({
-        icon: 'warning',
-        title: 'Formulario incompleto',
-        text: 'Revisa los campos obligatorios antes de continuar',
-        confirmButtonColor: '#2563eb'
-      });
+      this.notificarError('Formulario incompleto', 'Revisa los campos obligatorios');
       return;
     }
 
     this.cargando = true;
 
+    // Enviamos el valor del formulario directamente al servicio
     this.productoService.addProducto(this.productoForm.value).subscribe({
       next: () => {
         this.cargando = false;
-
         Swal.fire({
           icon: 'success',
-          title: 'Producto agregado',
-          text: 'El producto se guardó correctamente',
+          title: '¡Éxito!',
+          text: 'Producto registrado correctamente',
           confirmButtonColor: '#16a34a'
-        }).then(() => {
-          this.router.navigate(['/catalogo']);
-        });
+        }).then(() => this.router.navigate(['/catalogo']));
       },
       error: (err) => {
         this.cargando = false;
-        console.error('Error al agregar producto:', err);
-
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'No se pudo guardar el producto',
-          confirmButtonColor: '#dc2626'
-        });
+        console.error('Error:', err);
+        this.notificarError('Error', 'No se pudo guardar el producto');
       }
+    });
+  }
+
+  private notificarError(titulo: string, msj: string) {
+    Swal.fire({
+      icon: 'error',
+      title: titulo,
+      text: msj,
+      confirmButtonColor: '#2563eb'
     });
   }
 }

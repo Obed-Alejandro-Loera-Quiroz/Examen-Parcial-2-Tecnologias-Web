@@ -1,139 +1,180 @@
-<div class="container py-4 d-flex justify-content-center">
-  <div class="card shadow-lg border-0 overflow-hidden w-100" style="max-width: 1000px;">
-    
-    <div class="card-header bg-dark p-4 border-0">
-      <h3 class="fw-bold mb-0 text-white"><i class="bi bi-box-seam me-1 text-warning"></i>Agregar Producto</h3>
-      <p class="text-white-50 mb-0 small">Registra nuevos dispositivos en PAMICELL</p>
-    </div>
-
-    <div class="card-body p-4">
-      <form [formGroup]="productoForm" (ngSubmit)="guardarProducto()">
+<div class="container py-3">
+  <div class="row justify-content-center">
+    <div class="col-lg-12">
+      <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
         
-        <div class="row g-5"> <div class="col-12">
-            <h6 class="text-primary-custom fw-bold mb-2 border-bottom pb-1">1. Información General</h6>
-          </div>
-
-          <div class="col-md-8">
-            <label class="form-label fw-bold small text-uppercase text-muted mb-1">Nombre del Producto</label>
-            <div class="input-group input-group-sm has-validation">
-              <span class="input-group-text bg-light border-end-0"><i class="bi bi-tag"></i></span>
-              <input
-                type="text"
-                class="form-control bg-light border-start-0"
-                formControlName="nombre"
-                placeholder="Ej. iPhone 15 Pro Max"
-                [ngClass]="{ 'is-invalid': f['nombre'].invalid && f['nombre'].touched }"
-              >
-              <div class="invalid-feedback small">El nombre es obligatorio (mín. 3 caracteres).</div>
+        <div class="card-header bg-dark p-4 border-0 position-relative">
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
+              <h4 class="fw-bold mb-1 text-white text-uppercase tracking-wider">
+                <i class="bi bi-plus-circle-dotted me-2 text-warning"></i>Nuevo Producto
+              </h4>
+              <p class="text-white-50 mb-0">Agregar Producto • Sistema PAMICELL</p>
             </div>
-          </div>
-
-          <div class="col-md-4">
-            <label class="form-label fw-bold small text-uppercase text-muted mb-1">Marca</label>
-            <input
-              type="text"
-              class="form-control form-control-sm bg-light"
-              formControlName="marca"
-              placeholder="Ej. Apple"
-              [ngClass]="{ 'is-invalid': f['marca'].invalid && f['marca'].touched }"
-            >
-            <div class="invalid-feedback small">La marca es obligatoria.</div>
-          </div>
-
-          <div class="col-md-6">
-            <label class="form-label fw-bold small text-uppercase text-muted mb-1">Categoría</label>
-            <select 
-              class="form-select form-select-sm bg-light" 
-              formControlName="categoria"
-              [ngClass]="{ 'is-invalid': f['categoria'].invalid && f['categoria'].touched }">
-              <option value="">Seleccionar categoría...</option>
-              <option value="Smartphones">Smartphones</option>
-              <option value="Accesorios">Accesorios</option>
-              <option value="Tablets">Tablets</option>
-            </select>
-            <div class="invalid-feedback small">Selecciona una categoría.</div>
-          </div>
-
-          <div class="col-md-6">
-            <label class="form-label fw-bold small text-uppercase text-muted mb-1">URL de Imagen</label>
-            <div class="input-group input-group-sm">
-              <span class="input-group-text bg-light border-end-0"><i class="bi bi-image"></i></span>
-              <input
-                type="text"
-                class="form-control bg-light border-start-0"
-                formControlName="imagen"
-                placeholder="nombre-imagen.jpg"
-                [ngClass]="{ 'is-invalid': f['imagen'].invalid && f['imagen'].touched }"
-              >
+            <div class="d-none d-sm-block">
+              <i class="bi bi-box-seam text-white-50 display-6"></i>
             </div>
-          </div>
-
-          <div class="col-12 mt-4">
-            <h6 class="text-primary-custom fw-bold mb-2 border-bottom pb-1">2. Precios e Inventario</h6>
-          </div>
-
-          <div class="col-md-4">
-            <label class="form-label fw-bold small text-uppercase text-muted mb-1">Precio de Venta</label>
-            <div class="input-group input-group-sm">
-              <span class="input-group-text bg-primary-custom text-white border-0">$</span>
-              <input
-                type="number"
-                class="form-control fw-bold"
-                formControlName="precio"
-                [ngClass]="{ 'is-invalid': f['precio'].invalid && f['precio'].touched }"
-              >
-            </div>
-            <div class="invalid-feedback d-block small" *ngIf="f['precio'].invalid && f['precio'].touched">Precio mayor a 0.</div>
-          </div>
-
-          <div class="col-md-4">
-            <label class="form-label fw-bold small text-uppercase text-muted mb-1">Stock Inicial</label>
-            <input
-              type="number"
-              class="form-control form-control-sm fw-bold"
-              formControlName="stock"
-              [ngClass]="{ 'is-invalid': f['stock'].invalid && f['stock'].touched }"
-            >
-          </div>
-
-          <div class="col-md-4 d-flex align-items-end">
-            <div class="form-check form-switch pamicell-switch mb-1">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                formControlName="disponible"
-                id="disponible"
-              >
-              <label class="form-check-label fw-bold text-dark small" for="disponible">
-                Visible
-              </label>
-            </div>
-          </div>
-
-          <div class="col-12">
-            <label class="form-label fw-bold small text-uppercase text-muted mb-1">Descripción Técnica</label>
-            <textarea
-              rows="2"
-              class="form-control form-control-sm bg-light"
-              formControlName="descripcion"
-              placeholder="Especificaciones del equipo..."
-              [ngClass]="{ 'is-invalid': f['descripcion'].invalid && f['descripcion'].touched }"
-            ></textarea>
-            <div class="invalid-feedback small">Mínimo 10 caracteres.</div>
           </div>
         </div>
 
-        <div class="d-grid mt-4">
-          <button
-            type="submit"
-            class="btn btn-pamicell-save fw-bold shadow-sm py-2"
-            [disabled]="cargando"
-          >
-            <span *ngIf="cargando" class="spinner-border spinner-border-sm me-2"></span>
-            {{ cargando ? 'GUARDANDO...' : 'REGISTRAR PRODUCTO' }}
-          </button>
+        <div class="card-body p-4 p-md-5 bg-white">
+          <form [formGroup]="productoForm" (ngSubmit)="guardarProducto()" novalidate>
+            
+            <div class="row g-4">
+              <div class="col-12 mb-2">
+                <div class="d-flex align-items-center">
+                  <span class="badge bg-primary-custom rounded-pill me-2">1</span>
+                  <h6 class="text-primary-custom fw-bold mb-0 text-uppercase small tracking-widest">Información de Identidad</h6>
+                </div>
+                <hr class="mt-2 mb-0 opacity-10">
+              </div>
+
+              <div class="col-md-8">
+                <label class="form-label fw-semibold text-dark small">Nombre Comercial</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-phone"></i></span>
+                  <input
+                    type="text"
+                    class="form-control bg-light border-start-0 ps-0"
+                    formControlName="nombre"
+                    placeholder="Ej. Samsung Galaxy S24 Ultra"
+                    [ngClass]="{ 'is-invalid': f['nombre'].invalid && f['nombre'].touched }"
+                  >
+                  <div class="invalid-feedback">El nombre debe tener al menos 3 caracteres.</div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label fw-semibold text-dark small">Marca / Fabricante</label>
+                <input
+                  type="text"
+                  class="form-control bg-light"
+                  formControlName="marca"
+                  placeholder="Ej. Samsung"
+                  [ngClass]="{ 'is-invalid': f['marca'].invalid && f['marca'].touched }"
+                >
+                <div class="invalid-feedback">Campo requerido.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold text-dark small">Categoría de Dispositivo</label>
+                <select 
+                  class="form-select bg-light" 
+                  formControlName="categoria"
+                  [ngClass]="{ 'is-invalid': f['categoria'].invalid && f['categoria'].touched }">
+                  <option value="" disabled selected>Seleccione una categoría...</option>
+                  <option value="Smartphones">Smartphones</option>
+                  <option value="Accesorios">Accesorios</option>
+                  <option value="Tablets">Tablets</option>
+                  <option value="Laptops">Laptops</option>
+                </select>
+                <div class="invalid-feedback">Por favor elige una categoría.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold text-dark small">Imagen (Nombre de archivo o URL)</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-link-45deg"></i></span>
+                  <input
+                    type="text"
+                    class="form-control bg-light border-start-0 ps-0"
+                    formControlName="imagen"
+                    placeholder="ejemplo-imagen.webp"
+                    [ngClass]="{ 'is-invalid': f['imagen'].invalid && f['imagen'].touched }"
+                  >
+                </div>
+              </div>
+
+              <div class="col-12 mt-5 mb-2">
+                <div class="d-flex align-items-center">
+                  <span class="badge bg-primary-custom rounded-pill me-2">2</span>
+                  <h6 class="text-primary-custom fw-bold mb-0 text-uppercase small tracking-widest">Precios y Disponibilidad</h6>
+                </div>
+                <hr class="mt-2 mb-0 opacity-10">
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label fw-semibold text-dark small">Precio Unitario (MXN)</label>
+                <div class="input-group shadow-sm rounded">
+                  <span class="input-group-text bg-primary-custom text-white border-0">$</span>
+                  <input
+                    type="number"
+                    class="form-control fw-bold"
+                    formControlName="precio"
+                    placeholder="0.00"
+                    [ngClass]="{ 'is-invalid': f['precio'].invalid && f['precio'].touched }"
+                  >
+                </div>
+                <div class="text-danger small mt-1" *ngIf="f['precio'].invalid && f['precio'].touched">
+                  El precio debe ser mayor a 0.
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label fw-semibold text-dark small">Stock de Almacén</label>
+                <input
+                  type="number"
+                  class="form-control bg-light"
+                  formControlName="stock"
+                  placeholder="0"
+                  [ngClass]="{ 'is-invalid': f['stock'].invalid && f['stock'].touched }"
+                >
+              </div>
+
+              <div class="col-md-4 d-flex align-items-center justify-content-md-center">
+                <div class="form-check form-switch pamicell-switch mt-4">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    formControlName="disponible"
+                    id="disponible"
+                  >
+                  <label class="form-check-label ms-2 fw-semibold text-muted" for="disponible">
+                    Publicar en catálogo
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label fw-semibold text-dark small">Ficha Técnica / Descripción</label>
+                <textarea
+                  rows="3"
+                  class="form-control bg-light"
+                  formControlName="descripcion"
+                  placeholder="Escribe los detalles técnicos del producto..."
+                  [ngClass]="{ 'is-invalid': f['descripcion'].invalid && f['descripcion'].touched }"
+                ></textarea>
+                <div class="invalid-feedback">Mínimo 10 caracteres requeridos.</div>
+              </div>
+            </div>
+
+            <div class="row mt-5 pt-3">
+              <div class="col-md-6 mb-2">
+                <button type="button" class="btn btn-outline-secondary w-100 py-2 fw-bold" routerLink="/catalogo">
+                  <i class="bi bi-arrow-left me-2"></i>CANCELAR
+                </button>
+              </div>
+              <div class="col-md-6">
+                <button
+                  type="submit"
+                  class="btn btn-pamicell-save w-100 py-2 fw-bold shadow"
+                  [disabled]="cargando"
+                >
+                  <span *ngIf="!cargando"><i class="bi bi-cloud-check me-2"></i>REGISTRAR PRODUCTO</span>
+                  <span *ngIf="cargando">
+                    <span class="spinner-border spinner-border-sm me-2"></span>PROCESANDO...
+                  </span>
+                </button>
+              </div>
+            </div>
+
+          </form>
         </div>
-      </form>
+      </div>
+      
+      <div class="text-center mt-4">
+      </div>
+
     </div>
   </div>
 </div>
