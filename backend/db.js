@@ -6,7 +6,12 @@ const connection = mysql.createConnection({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    port: process.env.DB_PORT
+    port: process.env.DB_PORT,
+    // REQUISITO PARA AIVEN: Configuración de SSL
+    // rejectUnauthorized: false permite conectar sin necesidad de descargar el archivo .pem
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 connection.connect((err) => {
@@ -14,7 +19,7 @@ connection.connect((err) => {
         console.error('Error al conectar a la base de datos: ', err);
         return;
     }
-    console.log('Conectado exitosamente a la base de datos de mysql');
+    console.log('Conectado exitosamente a la base de datos de Aiven (MySQL)');
 });
 
 module.exports = connection;
